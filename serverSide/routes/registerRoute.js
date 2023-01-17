@@ -14,23 +14,30 @@ const app = express();
 //Middleware For flash messages
 app.use(flash());
 
+function checkAuthenticated(req, res, next){
+    if(req.isAuthenticated()){
+      return res.redirect('/dashboard');
+    }
+    next();
+  }
+
 // Writing a route
 router.get('/home',(req,res)=>{
     // console.log('',req.session.user)
     res.render('index');
 });
 
-router.get('/register',(req,res)=>{
+router.get('/register',checkAuthenticated,(req,res)=>{
     // console.log('',req.session.user)
     res.render('register');
 });
 
 router.post('/register',async (req,res)=>{
-    let { name, email, password1, password2 } = req.body;
+    let { name, email, password, password2 } = req.body;
     console.log ({
         name,
         email,
-        password1,
+        password,
         password2
 
     });
@@ -38,15 +45,15 @@ router.post('/register',async (req,res)=>{
     let errors = [];
 
     // Form validation is happening here
-    if(!name || !password1 || !email || !password2){
+    if(!name || !password || !email || !password2){
         errors.push({message: "please enter all fields"});
     }  
 
-    if(password1.length < 6 ){
+    if(password.length < 6 ){
         errors.push({message: "Passwords should be atleast 6 characters"});
     }
 
-    if(password1 != password2){
+    if(password != password2){
         errors.push({message:"Passwords do not match!"});
     }
 
@@ -54,7 +61,7 @@ router.post('/register',async (req,res)=>{
         res.render('register',{errors})
     } else {
         // Form validation has passed
-        let hashedPassword = await bcrypt.hash('password1', 10);
+        let hashedPassword = await bcrypt.hash('password', 10);
         console.log(hashedPassword);
         
         pool.query(  
