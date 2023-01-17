@@ -5,14 +5,34 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "transaction": "nodemon transactions.js",
+    "make-model": "npx sequelize-cli model:generate --name User --attributes firstName:string,lastName:string,email:string",
+    "migrate": "npx sequelize-cli db:migrate",
+    "rollback_most_recent": "npx sequelize-cli db:migrate:undo",
+    "make-seed": "npx sequelize-cli seed:generate --name demo-user",
+    "seed": "npx sequelize-cli db:seed:all"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "~3.0.0",
+    "bluebird": "~3.5.1",
+    "connect-session-sequelize": "~6.0.0",
+    "dotenv": "~6.1.0",
+    "ejs": "^3.1.8",
     "express": "^4.18.2",
+    "express-flash": "^0.0.2",
+    "express-session": "^1.17.3",
+    "lodash": "~4.17.11",
     "nodemon": "^2.0.20",
+    "passport": "^0.6.0",
+    "passport-local": "~1.0.0",
     "pg": "^8.8.0",
-    "pg-promise": "^11.0.2"
+    "pg-promise": "^11.0.2",
+    "sequelize": "^6.28.0"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^6.5.2"
   }
 }
