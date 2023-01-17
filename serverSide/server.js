@@ -70,7 +70,6 @@ app.use('/', loginRoutes);
 
 
 
-
 app.get('/', (req, res) => {
   res.send('Hello World This is the plug!')
 });
