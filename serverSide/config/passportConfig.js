@@ -1,4 +1,5 @@
 const localStrategy = require('passport-local').Strategy;
+const GoogleStrategy = require("passport-google-oauth2").Strategy;
 const { pool } = require('./dbConfig');
 const  bcrypt = require('bcrypt');
 const { authenticate } = require('passport');

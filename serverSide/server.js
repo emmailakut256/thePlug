@@ -8,6 +8,8 @@ const flash = require('express-flash');
 const passport = require('passport');
 const initializePassport = require('./config/passportConfig');
 
+require('./config/googleAuth');
+
 
 
 // const { Client } = require('pg');
@@ -68,11 +70,6 @@ app.use('/', registerRoutes);
 app.use('/', dashboardRoutes);
 app.use('/', loginRoutes);
 
-
-
-app.get('/', (req, res) => {
-  res.send('Hello World This is the plug!')
-});
 
 // For invalid routes
 app.get('*', (req, res) => {
