@@ -34,11 +34,27 @@ router.post('/login', passport.authenticate('local', {
 );
 
 
+router.get('/google', passport.authenticate('google',{
+    scope: ['email', 'profile']
+}  ));
+
+router.get('/auth/google/callback', passport.authenticate('google',{
+    successRedirect: '/dashboard',
+    failureRedirect: '/login'
+}  ));
+
 
 router.get('/logout', (req, res)=> {
-    
+
+    req.logOut((err)=>{
+        if(err){
+            return next(err);
+        }
+
     req.flash("success_msg","You have logged out")
     res.redirect('/login');
+    });
+    
     
 });
 

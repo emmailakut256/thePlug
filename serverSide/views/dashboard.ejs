@@ -10,7 +10,8 @@
 </head>
 <body>
     <a href="/logout">Log out</a>
-    <h1> Welcome <%= user.charAt(0).toUpperCase() + user.slice(1) %> </h1>
+    <h1> Welcome <%= String(user).charAt(0).toUpperCase() + String(user).slice(1) %> </h1>
+    
     
 </body>
 </html>

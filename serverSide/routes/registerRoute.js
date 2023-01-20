@@ -22,7 +22,7 @@ function checkAuthenticated(req, res, next){
   }
 
 // Writing a route
-router.get('/home',(req,res)=>{
+router.get('/',(req,res)=>{
     // console.log('',req.session.user)
     res.render('index');
 });
